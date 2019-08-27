@@ -1,3 +1,3 @@
 // Global app controller
 import x from './test';
-console.log(`${x} is successfully imported!!!!!`);
+console.log(`${x} is successfully imported!`);

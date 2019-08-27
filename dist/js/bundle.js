@@ -94,7 +94,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _test__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./test */ \"./src/js/test.js\");\n/* harmony import */ var _test__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_test__WEBPACK_IMPORTED_MODULE_0__);\n// Global app controller\n\nconsole.log(`${_test__WEBPACK_IMPORTED_MODULE_0___default.a} is successfully imported!!!!!`);\n\n//# sourceURL=webpack:///./src/js/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _test__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./test */ \"./src/js/test.js\");\n/* harmony import */ var _test__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_test__WEBPACK_IMPORTED_MODULE_0__);\n// Global app controller\n\nconsole.log(`${_test__WEBPACK_IMPORTED_MODULE_0___default.a} is successfully imported!`);\n\n//# sourceURL=webpack:///./src/js/index.js?");
 
 /***/ }),
 
@@ -105,7 +105,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _tes
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("module.exports = 23;\n\n//# sourceURL=webpack:///./src/js/test.js?");
+eval("module.exports = 79;\n\n//# sourceURL=webpack:///./src/js/test.js?");
 
 /***/ })
 
