@@ -3557,22 +3557,10 @@ eval("/**\n * Copyright (c) 2014-present, Facebook, Inc.\n *\n * This source cod
 /*!*************************!*\
   !*** ./src/js/index.js ***!
   \*************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _test__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./test */ \"./src/js/test.js\");\n/* harmony import */ var _test__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_test__WEBPACK_IMPORTED_MODULE_0__);\n// Global app controller\n\nconsole.log(\"\".concat(_test__WEBPACK_IMPORTED_MODULE_0___default.a, \" is successfully imported!\"));\n\n//# sourceURL=webpack:///./src/js/index.js?");
-
-/***/ }),
-
-/***/ "./src/js/test.js":
-/*!************************!*\
-  !*** ./src/js/test.js ***!
-  \************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("module.exports = 79;\n\n//# sourceURL=webpack:///./src/js/test.js?");
+eval("function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }\n\nfunction _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"next\", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"throw\", err); } _next(undefined); }); }; }\n\n// 24e353e277862bbad7a4e6c0ba41fd22\n// https://www.food2fork.com/api/search\nfunction getRecipe(_x) {\n  return _getRecipe.apply(this, arguments);\n}\n\nfunction _getRecipe() {\n  _getRecipe = _asyncToGenerator(\n  /*#__PURE__*/\n  regeneratorRuntime.mark(function _callee(query) {\n    var queryUrl, ApiKey, result, recipe;\n    return regeneratorRuntime.wrap(function _callee$(_context) {\n      while (1) {\n        switch (_context.prev = _context.next) {\n          case 0:\n            queryUrl = 'https://www.food2fork.com/api/search?';\n            ApiKey = '24e353e277862bbad7a4e6c0ba41fd22';\n            console.log(\"\".concat(queryUrl, \"key=\").concat(ApiKey, \"&q=\").concat(query));\n            _context.next = 5;\n            return fetch(\"\".concat(queryUrl, \"key=\").concat(ApiKey, \"&q=\").concat(query));\n\n          case 5:\n            result = _context.sent;\n            _context.next = 8;\n            return result.json();\n\n          case 8:\n            recipe = _context.sent;\n            console.log(recipe);\n\n          case 10:\n          case \"end\":\n            return _context.stop();\n        }\n      }\n    }, _callee);\n  }));\n  return _getRecipe.apply(this, arguments);\n}\n\ngetRecipe('apple');\n\n//# sourceURL=webpack:///./src/js/index.js?");
 
 /***/ }),
 
