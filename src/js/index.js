@@ -1,33 +1,38 @@
-// 24e353e277862bbad7a4e6c0ba41fd22
-// https://www.food2fork.com/api/search
+import Search from './models/Search';
 
-const axios = require('axios');
 
-async function getRecipe(query){
-    const queryUrl = 'https://www.food2fork.com/api/search?';
-    const ApiKey = '24e353e277862bbad7a4e6c0ba41fd22';
-    
-    try {
-        const result = await fetch(`${queryUrl}key=${ApiKey}&q=${query}`);
-        const recipe = await result.json();
-        console.log(recipe);
-    } catch(err){
-        console.log(err);
+/* Global state of the app 
+- search object
+- current recipe object
+- shopping list object
+- liked object
+*/
+
+const state = {};
+
+const controlSearch = async () => {
+    // get the query from the view
+    const query = 'pizza';
+    if (query) {
+        //new search object and add to state
+        state.search = new Search(query);
+
+        //search for recipe
+        await state.search.getRecipe();
+
+        //prepare UI for result
+        
+
+        //render result on UI
+        console.log(state.search);
+
     }
 }
 
-getRecipe('apple');
+document.querySelector('.search').addEventListener('submit', env => {
+    env.preventDefault();
+    controlSearch();
+})
 
-async function getRecipeWithAxios(query){
-    const queryUrl = 'https://www.food2fork.com/api/search?';
-    const ApiKey = '24e353e277862bbad7a4e6c0ba41fd22';
-    axios.get(`${queryUrl}key=${ApiKey}&q=${query}`)
-        .then(function(recipe){
-            console.log(recipe.data);
-        })
-        .catch(function(err){
-            console.log(err);
-        })
-}
 
-getRecipeWithAxios('banana');
+
