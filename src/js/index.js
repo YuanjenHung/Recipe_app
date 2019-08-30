@@ -24,13 +24,14 @@ const controlSearch = async () => {
         searchView.clearInputField();
         renderLoader(elements.searchResult);
 
+        state.search.page = 2;
+
         //search for recipe
         await state.search.getRecipe();
 
         //render result on UI
         clearLoader();
-        searchView.renderSearchList(state.search.result)
-
+        searchView.renderSearchList(state.search)
     }
 }
 

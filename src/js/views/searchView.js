@@ -33,10 +33,43 @@ const limitSentence = (sentence, limit = 17) => {
     return sentence;
 }
 
+const createButtonTemp = (page, type) => `
+    <button class="btn-inline results__btn--${type === 'prev' ? 'prev' : 'next'}">
+        <svg class="search__icon">
+            <use href="img/icons.svg#icon-triangle-${type === 'prev' ? 'left' : 'right'}"></use>
+        </svg>
+        <span>Page ${type === 'prev' ? page - 1 : page + 1}</span>
+    </button>
+`;
+
+
+const renderButton = (page, result) => {
+    const prevBtn = createButtonTemp(page, 'prev');
+    const nextBtn = createButtonTemp(page, 'next');
+   
+    console.log(page, result, result.length);
+
+    //clean the button field
+    elements.buttonField.innerHTML = '';
+
+    if (page === 1 && result.length === 10){
+        //display next page button
+        elements.buttonField.insertAdjacentHTML('beforeend', nextBtn);
+    } else if (page > 1 && result.length === 10){
+        //display both button
+        elements.buttonField.insertAdjacentHTML('beforeend', prevBtn);
+        elements.buttonField.insertAdjacentHTML('beforeend', nextBtn);
+    } else if (page > 1 && result.length < 10){
+        //display previous button
+        elements.buttonField.insertAdjacentHTML('beforeend', prevBtn);
+    }
+}
+
 export const getInput = () => elements.searchInput.value;
 
-export const renderSearchList = arr => {
-    arr.forEach(renderListItem);
+export const renderSearchList = search => {
+    search.result.forEach(renderListItem);
+    renderButton(search.page, search.result);
 }
 export const clearInputField = () => {
     elements.searchInput.value = '';
