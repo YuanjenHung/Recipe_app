@@ -8,29 +8,27 @@ const axios = require('axios');
 // 461e69e1323de2956705b5a90c1e6c29
 // https://api.edamam.com/search
 
-const isFood2fork = false;
-
-
 export default class Search{
     constructor(query){
         this.query = query;
     }
 
     async getRecipe(){
-        const that  = this;
+        console.log('async getRecipe start!')
+
         const searchUrl = 'https://api.edamam.com/search?';
         const apiKey = '461e69e1323de2956705b5a90c1e6c29';
         const apiID = 'c95090c8';
         const requestUrl = `${searchUrl}q=${this.query}&app_id=${apiID}&app_key=${apiKey}`;
 
-        axios.get(requestUrl)
-        .then(function(res){
-            //console.log(res.data.hits);
+        try {
+            const res = await axios.get(requestUrl);
             const result = res.data.hits;
-            that.result = result;
-        })
-        .catch(function(err){
+            this.result = result;
+        } catch (err) {
             console.log(err);
-        });
+        }
+        
+        console.log('async getRecipe finish.')
     }
 }
