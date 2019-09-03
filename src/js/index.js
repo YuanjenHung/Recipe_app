@@ -1,4 +1,5 @@
 import Search from './models/Search';
+import Recipe from './models/Recipe';
 import { elements, renderLoader, clearLoader } from './views/base';
 import * as searchView from './views/searchView';
 
@@ -12,6 +13,9 @@ import * as searchView from './views/searchView';
 
 const state = {};
 
+state.recipe = new Recipe('1b6dfeaf0988f96b187c7c9bb69a14fa');
+state.recipe.getRecipeByID();
+
 const controlSearch = async () => {
     //prepare UI for result
     searchView.clearSearchList();
@@ -22,7 +26,7 @@ const controlSearch = async () => {
 
     //render result on UI
     clearLoader();
-    searchView.renderSearchList(state.search)
+    searchView.renderSearchList(state.search);
 }
 
 elements.searchForm.addEventListener('submit', env => {
@@ -53,7 +57,6 @@ elements.buttonField.addEventListener('click', env => {
 
     //render
     controlSearch();
-
 });
 
 

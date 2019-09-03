@@ -1,4 +1,5 @@
 const axios = require('axios');
+import {searchUrl, apiID, apiKey} from '../config';
 
 // food2fork
 // 24e353e277862bbad7a4e6c0ba41fd22
@@ -17,9 +18,6 @@ export default class Search{
     async getRecipe(){
         console.log('async getRecipe start!')
 
-        const searchUrl = 'https://api.edamam.com/search?';
-        const apiKey = '461e69e1323de2956705b5a90c1e6c29';
-        const apiID = 'c95090c8';
         const start = (this.page - 1) * 10;
         const end = this.page * 10;
         const requestUrl = `${searchUrl}q=${this.query}&app_id=${apiID}&app_key=${apiKey}&from=${start}&to=${end}`;
