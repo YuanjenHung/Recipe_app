@@ -12,7 +12,14 @@ export default class Recipe {
 
         try {
             const res = await axios.get(requestUrl);
-            console.log(res.data[0]);
+            const recipe = res.data[0];
+
+            this.image = recipe.image;
+            this.title= recipe.label;
+            this.author = recipe.source;
+            this.ingrediants = recipe.ingredients;
+            this.url = recipe.url;
+
         } catch (err) {
             console.log(err);
         }

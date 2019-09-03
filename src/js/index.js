@@ -13,8 +13,9 @@ import * as searchView from './views/searchView';
 
 const state = {};
 
-state.recipe = new Recipe('1b6dfeaf0988f96b187c7c9bb69a14fa');
+state.recipe = new Recipe('d7167bbdf03eb4b786684ab6a81d52b4');
 state.recipe.getRecipeByID();
+console.log(state.recipe);
 
 const controlSearch = async () => {
     //prepare UI for result
