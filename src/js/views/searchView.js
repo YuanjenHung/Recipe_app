@@ -3,7 +3,7 @@ import { elements } from './base';
 const renderListItem = (el) => {
     const template = `
         <li>
-            <a class="results__link" href="${el.recipe.uri}">
+            <a class="results__link" href="#${el.recipe.uri.substr(51)}">
                 <figure class="results__fig">
                     <img src="${el.recipe.image}" alt="Test">
                 </figure>
@@ -34,7 +34,7 @@ const limitSentence = (sentence, limit = 17) => {
 }
 
 const createButtonTemp = (page, type) => `
-    <button class="btn-inline results__btn--${type === 'prev' ? 'prev' : 'next'}">
+    <button class="btn-inline results__btn--${type === 'prev' ? 'prev' : 'next'}" data-page="${type === 'prev' ? page - 1 : page + 1}">
         <svg class="search__icon">
             <use href="img/icons.svg#icon-triangle-${type === 'prev' ? 'left' : 'right'}"></use>
         </svg>
@@ -46,8 +46,6 @@ const createButtonTemp = (page, type) => `
 const renderButton = (page, result) => {
     const prevBtn = createButtonTemp(page, 'prev');
     const nextBtn = createButtonTemp(page, 'next');
-   
-    console.log(page, result, result.length);
 
     //clean the button field
     elements.buttonField.innerHTML = '';
@@ -55,6 +53,7 @@ const renderButton = (page, result) => {
     if (page === 1 && result.length === 10){
         //display next page button
         elements.buttonField.insertAdjacentHTML('beforeend', nextBtn);
+
     } else if (page > 1 && result.length === 10){
         //display both button
         elements.buttonField.insertAdjacentHTML('beforeend', prevBtn);
@@ -69,7 +68,7 @@ export const getInput = () => elements.searchInput.value;
 
 export const renderSearchList = search => {
     search.result.forEach(renderListItem);
-    renderButton(search.page, search.result);
+    renderButton(parseInt(search.page), search.result);
 }
 export const clearInputField = () => {
     elements.searchInput.value = '';

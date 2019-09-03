@@ -13,32 +13,48 @@ import * as searchView from './views/searchView';
 const state = {};
 
 const controlSearch = async () => {
-    // get the query from the view
-    const query = searchView.getInput();
-    if (query) {
-        //new search object and add to state
-        state.search = new Search(query);
+    //prepare UI for result
+    searchView.clearSearchList();
+    renderLoader(elements.searchResult);
 
-        //prepare UI for result
-        searchView.clearSearchList();
-        searchView.clearInputField();
-        renderLoader(elements.searchResult);
+    //search for recipe
+    await state.search.getRecipe();
 
-        state.search.page = 2;
-
-        //search for recipe
-        await state.search.getRecipe();
-
-        //render result on UI
-        clearLoader();
-        searchView.renderSearchList(state.search)
-    }
+    //render result on UI
+    clearLoader();
+    searchView.renderSearchList(state.search)
 }
 
 elements.searchForm.addEventListener('submit', env => {
     env.preventDefault();
+
+    // get the query from the view
+    const query = searchView.getInput();
+
+    //chech the field
+    if(query){
+        //new search object and add to state
+        state.search = new Search(query);
+
+        //clear the searching field
+        searchView.clearInputField();
+
+        //render
+        controlSearch();
+    }
+});
+
+elements.buttonField.addEventListener('click', env => {
+    //figure out the page users want to go to
+    const page = env.target.closest('.btn-inline').dataset.page;
+
+    //update state
+    state.search.page = page;
+
+    //render
     controlSearch();
-})
+
+});
 
 
 

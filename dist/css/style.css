@@ -141,7 +141,11 @@ body {
 
 .loader {
   margin: 5rem auto;
-  text-align: center; }
+  text-align: center; 
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translateX(-50%);}
   .loader svg {
     height: 5.5rem;
     width: 5.5rem;
@@ -224,7 +228,8 @@ body {
 
 .results,
 .likes {
-  padding: 3rem 0; }
+  padding: 3rem 0; 
+  position: relative;}
   .results__list,
   .likes__list {
     list-style: none; }
@@ -284,6 +289,11 @@ body {
     color: #968B87;
     text-transform: uppercase;
     font-weight: 600; }
+  .results__pages {
+    position: absolute;
+    width: 25vw;
+    bottom: 5rem
+  }
   .results__pages,
   .likes__pages {
     margin-top: 3rem;
