@@ -34,4 +34,12 @@ export default class Recipe {
     calcServing() {
         this.serving = 4;
     }
+
+    roundIngrediant() {
+        this.ingrediants.forEach(ingrediant => {
+            if (ingrediant.weight % 1 != 0) {
+                ingrediant.weight = ingrediant.weight.toFixed(2);
+            }
+        });
+    }
 }
