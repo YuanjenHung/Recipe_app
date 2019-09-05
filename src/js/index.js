@@ -13,9 +13,22 @@ import * as searchView from './views/searchView';
 
 const state = {};
 
-state.recipe = new Recipe('d7167bbdf03eb4b786684ab6a81d52b4');
-state.recipe.getRecipeByID();
-console.log(state.recipe);
+/* Recipe functionality */
+
+const controlRecipe = async () => {
+    const hash = window.location.hash.replace('#','');
+    state.recipe = new Recipe(hash);
+    await state.recipe.getRecipeByID();
+    console.log(state.recipe);
+}
+
+window.addEventListener('hashchange', controlRecipe);
+
+// state.recipe = new Recipe('d7167bbdf03eb4b786684ab6a81d52b4');
+// state.recipe.getRecipeByID();
+// console.log(state.recipe);
+
+/* Search functionality */
 
 const controlSearch = async () => {
     //prepare UI for result
@@ -59,6 +72,7 @@ elements.buttonField.addEventListener('click', env => {
     //render
     controlSearch();
 });
+
 
 
 

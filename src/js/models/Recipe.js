@@ -24,4 +24,14 @@ export default class Recipe {
             console.log(err);
         }
     }
+
+    calcCookTime() {
+        const numOfIngrediants = this.ingrediants.length;
+        const periods = Math.ceil(numOfIngrediants / 3);
+        this.time = periods * 15;
+    }
+
+    calcServing() {
+        this.serving = 4;
+    }
 }
