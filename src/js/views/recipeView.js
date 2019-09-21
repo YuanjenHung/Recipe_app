@@ -1,14 +1,16 @@
+const Fraction = require('fractional').Fraction;
 import { elements } from './base';
 
 const renderIngrediants = ingrediants => {
     const ingrediantField = document.querySelector('.recipe__ingredient-list');
     ingrediants.forEach(ingrediant => {
+        let fractionWeight = new Fraction(ingrediant.weight).toString();
         const template = `
             <li class="recipe__item">
                 <svg class="recipe__icon">
                     <use href="img/icons.svg#icon-check"></use>
                 </svg>
-                <div class="recipe__count">${ingrediant.weight == 0 ? ingrediant.quantity : ingrediant.weight}</div>
+                <div class="recipe__count">${fractionWeight == 0 ? ingrediant.quantity : fractionWeight}</div>
                 <div class="recipe__ingredient">
                     <span class="recipe__unit">${ingrediant.weight == 0 ? '' : 'g'}</span>
                     ${ingrediant.food}

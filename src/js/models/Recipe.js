@@ -38,7 +38,7 @@ export default class Recipe {
     roundIngrediant() {
         this.ingrediants.forEach(ingrediant => {
             if (ingrediant.weight % 1 != 0) {
-                ingrediant.weight = ingrediant.weight.toFixed(2);
+                ingrediant.weight = ingrediant.weight.toFixed(1);
             }
         });
     }
