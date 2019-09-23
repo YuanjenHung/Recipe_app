@@ -21,6 +21,17 @@ const renderIngrediants = ingrediants => {
     });
 }
 
+export const clearIngrediantField = () => {
+    const ingrediantField = document.querySelector('.recipe__ingredient-list');
+    ingrediantField.innerHTML = '';
+
+}
+
+export const updateServingField = (newServing) => {
+    const servingField = document.querySelector('.recipe__info-data--people');
+    servingField.textContent = newServing;
+}
+
 export const clearRecipeField = () => {
     elements.recipeField.innerHTML = '';
 }
@@ -49,12 +60,12 @@ export const renderRecipe = recipe => {
                 <span class="recipe__info-text"> servings</span>
 
                 <div class="recipe__info-buttons">
-                    <button class="btn-tiny">
+                    <button class="btn-tiny btn-decrease">
                         <svg>
                             <use href="img/icons.svg#icon-circle-with-minus"></use>
                         </svg>
                     </button>
-                    <button class="btn-tiny">
+                    <button class="btn-tiny btn-increase">
                         <svg>
                             <use href="img/icons.svg#icon-circle-with-plus"></use>
                         </svg>

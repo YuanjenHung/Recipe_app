@@ -38,8 +38,25 @@ export default class Recipe {
     roundIngrediant() {
         this.ingrediants.forEach(ingrediant => {
             if (ingrediant.weight % 1 != 0) {
+                ingrediant.weight = parseInt(ingrediant.weight);
                 ingrediant.weight = ingrediant.weight.toFixed(1);
             }
         });
+    }
+
+    updateServing(type) {
+        //serving
+        const newServing = type === 'dec' ? this.serving - 1 : this.serving + 1;
+
+        //ingrediant
+        this.ingrediants.forEach(ing => {
+            if (ing.weight) {
+                ing.weight *= newServing / this.serving;
+            } else {
+                ing.quantity *= newServing / this.serving;
+            }
+        })
+
+        this.serving = newServing;
     }
 }

@@ -50,6 +50,22 @@ const controlRecipe = async () => {
 
 ['hashchange', 'load'].forEach(event => {window.addEventListener(event, controlRecipe)});
 
+/* serving update */
+
+elements.recipeField.addEventListener('click', e => {
+    if(e.target.matches('.btn-decrease, .btn-decrease *')) {
+        if (state.recipe.serving > 1) {
+            state.recipe.updateServing('dec');
+        }
+    } else {
+        state.recipe.updateServing('inc');
+    }
+    recipeView.clearIngrediantField();
+    recipeView.renderRecipe(state.recipe);
+    recipeView.updateServingField(state.recipe.serving);
+})
+
+
 /* Search functionality */
 
 const controlSearch = async () => {
