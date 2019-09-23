@@ -4,6 +4,7 @@ import List from './models/List';
 import { elements, renderLoader, clearLoader } from './views/base';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
+import * as listView from './views/listView';
 
 
 /* Global state of the app 
@@ -115,6 +116,7 @@ elements.buttonField.addEventListener('click', env => {
     controlSearch();
 });
 
-
-window.l = new List();
-
+listView.renderItem({
+    count: 500,
+    ingrediant: 'tomato'
+});
