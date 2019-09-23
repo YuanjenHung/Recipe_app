@@ -59,8 +59,10 @@ elements.recipeField.addEventListener('click', e => {
         if (state.recipe.serving > 1) {
             state.recipe.updateServing('dec');
         }
-    } else {
+    } else if (e.target.matches('.btn-increase, .btn-increase *')){
         state.recipe.updateServing('inc');
+    } else if (e.target.matches('.recipe__btn--add, .recipe__btn--add *')){
+        controlList();
     }
     recipeView.updateServing(state.recipe);
 })
@@ -116,7 +118,15 @@ elements.buttonField.addEventListener('click', env => {
     controlSearch();
 });
 
-listView.renderItem({
-    count: 500,
-    ingrediant: 'tomato'
-});
+/* List functionality */
+
+const controlList = () => {
+    if (!state.list) state.list = new List();
+
+    state.recipe.ingrediants.forEach(el => {
+        const count = el.weight != 0 ? el.weight : el.quantity;
+        const unit = el.weight != 0 ? 'g' : 'unit';
+        const item = state.list.addItem(count, unit, el.food);
+        listView.renderItem(item);
+    })
+}
