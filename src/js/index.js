@@ -60,9 +60,7 @@ elements.recipeField.addEventListener('click', e => {
     } else {
         state.recipe.updateServing('inc');
     }
-    recipeView.clearIngrediantField();
-    recipeView.renderRecipe(state.recipe);
-    recipeView.updateServingField(state.recipe.serving);
+    recipeView.updateServing(state.recipe);
 })
 
 

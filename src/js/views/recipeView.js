@@ -21,15 +21,17 @@ const renderIngrediants = ingrediants => {
     });
 }
 
-export const clearIngrediantField = () => {
+const clearIngrediantField = () => {
     const ingrediantField = document.querySelector('.recipe__ingredient-list');
     ingrediantField.innerHTML = '';
 
 }
 
-export const updateServingField = (newServing) => {
+export const updateServing = (recipe) => {
     const servingField = document.querySelector('.recipe__info-data--people');
-    servingField.textContent = newServing;
+    servingField.textContent = recipe.serving;
+    clearIngrediantField();
+    renderIngrediants(recipe.ingrediants);
 }
 
 export const clearRecipeField = () => {
