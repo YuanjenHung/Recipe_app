@@ -1,10 +1,12 @@
 import Search from './models/Search';
 import Recipe from './models/Recipe';
 import List from './models/List';
+import Likes from './models/Likes';
 import { elements, renderLoader, clearLoader } from './views/base';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 import * as listView from './views/listView';
+import * as likesView from './views/likesView';
 
 
 /* Global state of the app 
@@ -15,58 +17,6 @@ import * as listView from './views/listView';
 */
 
 const state = {};
-
-/* Recipe functionality */
-
-const controlRecipe = async () => {
-    const hash = window.location.hash.replace('#','');
-
-    if (hash) {
-        //prepare ui
-        recipeView.clearRecipeField();
-        renderLoader(elements.recipeField);
-
-        //create recipe obj and add to state
-        state.recipe = new Recipe(hash);
-
-        try {
-            //get recipe data
-            await state.recipe.getRecipeByID();
-
-            //calc cooking time, serving and round Ingrediants weight
-            state.recipe.calcCookTime();
-            state.recipe.calcServing();
-            state.recipe.roundIngrediant();
-
-            //render the ui
-            clearLoader();
-            recipeView.renderRecipe(state.recipe);
-
-        } catch (err) {
-            clearLoader();
-            console.log(err);
-        }
-        
-    }
-}
-
-['hashchange', 'load'].forEach(event => {window.addEventListener(event, controlRecipe)});
-
-/* serving update */
-
-elements.recipeField.addEventListener('click', e => {
-    if(e.target.matches('.btn-decrease, .btn-decrease *')) {
-        if (state.recipe.serving > 1) {
-            state.recipe.updateServing('dec');
-        }
-    } else if (e.target.matches('.btn-increase, .btn-increase *')){
-        state.recipe.updateServing('inc');
-    } else if (e.target.matches('.recipe__btn--add, .recipe__btn--add *')){
-        controlList();
-    }
-    recipeView.updateServing(state.recipe);
-})
-
 
 /* Search functionality */
 
@@ -118,6 +68,57 @@ elements.buttonField.addEventListener('click', env => {
     controlSearch();
 });
 
+/* Recipe functionality */
+
+const controlRecipe = async () => {
+    const hash = window.location.hash.replace('#','');
+
+    if (hash) {
+        //prepare ui
+        recipeView.clearRecipeField();
+        renderLoader(elements.recipeField);
+
+        //create recipe obj and add to state
+        state.recipe = new Recipe(hash);
+
+        try {
+            //get recipe data
+            await state.recipe.getRecipeByID();
+
+            //calc cooking time, serving and round Ingrediants weight
+            state.recipe.calcCookTime();
+            state.recipe.calcServing();
+            state.recipe.roundIngrediant();
+
+            //render the ui
+            clearLoader();
+            recipeView.renderRecipe(state.recipe);
+
+        } catch (err) {
+            clearLoader();
+            console.log(err);
+        }
+        
+    }
+}
+
+['hashchange', 'load'].forEach(event => {window.addEventListener(event, controlRecipe)});
+
+elements.recipeField.addEventListener('click', e => {
+    if(e.target.matches('.recipe__info-buttons, .recipe__info-buttons *')) {
+        if (e.target.matches('.btn-increase, .btn-increase *')) {
+            state.recipe.updateServing('inc');
+        } else {
+            if (state.recipe.serving > 1) state.recipe.updateServing('dec');
+        }
+        recipeView.updateServing(state.recipe);
+    } else if (e.target.matches('.recipe__btn--add, .recipe__btn--add *')){
+        controlList();
+    } else if (e.target.matches('.recipe__love, .recipe__love *')){
+        controlLikes();
+    }
+})
+
 /* List functionality */
 
 const controlList = () => {
@@ -151,3 +152,26 @@ elements.shopListField.addEventListener('change', e => {
         state.list.updateItem(id,e.target.value);
     }
 })
+
+/* Like functionality */
+
+const controlLikes = () => {
+    if (!state.likes) state.likes = new Likes();
+    if(state.likes.isLiked(state.recipe.id)){
+        //remove item from likes state
+        state.likes.deleteLike(state.recipe.id);
+
+        //toggle like button
+
+        //remove item from interface
+
+    } else {
+        //add item to likes state
+        const item = state.likes.addLike(state.recipe);
+
+        //toggle like button
+
+        //add item to interface
+    }
+    console.log(state.likes);
+}
