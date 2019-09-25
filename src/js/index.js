@@ -17,6 +17,7 @@ import * as likesView from './views/likesView';
 */
 
 const state = {};
+likesView.toggleLikeMenu(0);
 
 /* Search functionality */
 
@@ -93,6 +94,8 @@ const controlRecipe = async () => {
             //render the ui
             clearLoader();
             recipeView.renderRecipe(state.recipe);
+            if (!state.likes) state.likes = new Likes();
+            likesView.toggleButton(state.likes.isLiked(state.recipe.id));
 
         } catch (err) {
             clearLoader();
@@ -122,7 +125,7 @@ elements.recipeField.addEventListener('click', e => {
 /* List functionality */
 
 const controlList = () => {
-    if (!state.list) state.list = new List();
+    //if (!state.list) state.list = new List();
 
     state.recipe.ingrediants.forEach(el => {
         const count = el.weight != 0 ? el.weight : el.quantity;
@@ -162,6 +165,7 @@ const controlLikes = () => {
         state.likes.deleteLike(state.recipe.id);
 
         //toggle like button
+        likesView.toggleButton(false);
 
         //remove item from interface
 
@@ -170,8 +174,10 @@ const controlLikes = () => {
         const item = state.likes.addLike(state.recipe);
 
         //toggle like button
+        likesView.toggleButton(true);
 
         //add item to interface
     }
     console.log(state.likes);
+    likesView.toggleLikeMenu(state.likes.getLength());
 }
