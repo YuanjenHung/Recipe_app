@@ -130,3 +130,24 @@ const controlList = () => {
         listView.renderItem(item);
     })
 }
+
+elements.shopListField.addEventListener('click', e => {
+    const id = e.target.closest('.shopping__item').dataset.id;
+    
+    if (e.target.matches('.shopping__delete, .shopping__delete *')) {
+        //remove the item from state
+        state.list.deleteItem(id);
+
+        //delete the item on the interface
+        listView.deleteItem(id);
+    } else if (e.target.matches('.shopping__count-value')) {
+        //update the state
+        state.list.updateItem(id,e.target.value);
+    }
+});
+
+elements.shopListField.addEventListener('change', e => {
+    if (e.target.matches('.shopping__count-value')) {
+        state.list.updateItem(id,e.target.value);
+    }
+})
